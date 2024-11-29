@@ -50,7 +50,7 @@ function login(ev) {
 
 <style scoped>
 .input {
-  @apply !border-zinc-800 focus:!border-emerald-500 !w-full;
+  @apply !w-full;
 }
 
 </style>
