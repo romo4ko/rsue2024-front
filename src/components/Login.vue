@@ -24,7 +24,7 @@ function login(ev) {
 </script>
 
 <template>
-  <div class="flex flex-col justify-center px-5 py-5 bg-[#1e1e1e] rounded-xl w-full max-w-[350px]">
+  <div class="flex flex-col justify-center px-5 py-5 bg-[#fff] rounded-xl w-full max-w-[350px] border-2">
     <div class="gap-4 flex flex-col">
       <h1 class="text-2xl">
         Логин
@@ -39,7 +39,7 @@ function login(ev) {
           <label for="password">Пароль</label>
         </FloatLabel>
       </div>
-      <Button @click="login">Отправить</Button>
+      <Button class="!text-[#fff]" @click="login">Отправить</Button>
       <span>
        У вас нет учетной записи? <RouterLink to="/registration">Зарегистрироваться</RouterLink>
       </span>
