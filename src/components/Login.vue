@@ -15,7 +15,6 @@ const registration = useRegistrationStore();
 
 function login(ev) {
   ev.preventDefault();
-  console.log(authorization.value)
   registration.login(authorization.value).then(() => {
     router.push({
       name: "Profile",
@@ -49,8 +48,4 @@ function login(ev) {
 </template>
 
 <style scoped>
-.input {
-  @apply !w-full;
-}
-
 </style>

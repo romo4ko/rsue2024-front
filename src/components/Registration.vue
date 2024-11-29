@@ -69,8 +69,5 @@ function register(ev) {
 </template>
 
 <style scoped>
-.input {
-  @apply  !w-full;
-}
 
 </style>
