@@ -22,23 +22,23 @@ const visible = ref(false)
               <img class="w-full h-full" :src="child.image" alt=".">
             </div>
             <div class="mx-auto">
-              <a href="">
+              <a href="" class="text-black">
                 {{ child.name }}
               </a>
             </div>
           </div>
-          <a href="" class="w-[10px] h-[10px]">
-            <delete-icon class="w-full h-full" />
-          </a>
+<!--          <a href="" class="w-[10px] h-[10px]">-->
+<!--            <delete-icon class="w-full h-full" />-->
+<!--          </a>-->
         </div>
       </div>
-      <button
+      <Button
           class="w-full px-[20px] py-[15px] bg-[#646cff] text-[#fff] rounded-[10px] hover:bg-[#757cff]"
           label="Show"
           @click="visible = true"
       >
         Добавить ребенка
-      </button>
+      </Button>
     </div>
   </div>
   <div class="w-[40%]">
@@ -86,9 +86,9 @@ const visible = ref(false)
         <InputText class="input" id="password1" />
         <label for="password1">Пароль</label>
       </FloatLabel>
-      <button class="w-full px-[20px] py-[15px] bg-[#646cff] text-[#fff] rounded-[10px] hover:bg-[#757cff]">
+      <Button class="w-full px-[20px] py-[15px] bg-[#646cff] text-[#fff] rounded-[10px] hover:bg-[#757cff]">
         Отправить
-      </button>
+      </Button>
     </div>
   </Dialog>
 </template>
