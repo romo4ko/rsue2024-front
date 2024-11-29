@@ -4,6 +4,7 @@ import {Button, InputText} from "primevue";
 import {RouterLink} from "vue-router";
 import useRegistrationStore from "../store/index.js";
 import router from "../router.js";
+import FloatLabel from "primevue/floatlabel";
 
 const authorization = ref({
   email: null,
@@ -30,8 +31,14 @@ function login(ev) {
         Login
       </h1>
       <div class="flex flex-col gap-4">
-        <InputText class="input" type="text" v-model="authorization.email" placeholder="Email" />
-        <InputText class="input" type="text" v-model="authorization.password" placeholder="Password" />
+        <FloatLabel variant="on">
+          <InputText class="input" id="email" v-model="authorization.email" />
+          <label for="email">Почта</label>
+        </FloatLabel>
+        <FloatLabel variant="on">
+          <InputText class="input" id="password" v-model="authorization.password" />
+          <label for="password">Пароль</label>
+        </FloatLabel>
       </div>
       <Button @click="login">Submit</Button>
       <span>
@@ -43,7 +50,7 @@ function login(ev) {
 
 <style scoped>
 .input {
-  @apply !border-zinc-800 focus:!border-emerald-500;
+  @apply !border-zinc-800 focus:!border-emerald-500 !w-full;
 }
 
 </style>
