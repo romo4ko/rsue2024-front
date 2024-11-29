@@ -32,6 +32,9 @@ const myPreset = definePreset(Aura, {
 
 app.use(router).use(PrimeVue, {
     theme: {
-        preset: myPreset
+        preset: myPreset,
+        options: {
+            darkModeSelector: 'none',
+        }
     }
 }).mount('#app')

@@ -29,7 +29,7 @@ function register(ev) {
 </script>
 
 <template>
-  <div class="flex flex-col justify-center px-5 py-5 bg-[#1e1e1e] rounded-xl w-full max-w-[350px]">
+  <div class="flex flex-col justify-center px-5 py-5 rounded-xl w-full max-w-[350px] border-2">
     <div class="gap-4 flex flex-col">
       <h1 class="text-2xl">
         Регистрация
