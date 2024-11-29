@@ -28,7 +28,7 @@ function login(ev) {
   <div class="flex flex-col justify-center px-5 py-5 bg-[#1e1e1e] rounded-xl w-full max-w-[350px]">
     <div class="gap-4 flex flex-col">
       <h1 class="text-2xl">
-        Login
+        Логин
       </h1>
       <div class="flex flex-col gap-4">
         <FloatLabel variant="on">
@@ -40,9 +40,9 @@ function login(ev) {
           <label for="password">Пароль</label>
         </FloatLabel>
       </div>
-      <Button @click="login">Submit</Button>
+      <Button @click="login">Отправить</Button>
       <span>
-        Don't have an account? <RouterLink to="/registration">Sign up</RouterLink>
+       У вас нет учетной записи? <RouterLink to="/registration">Зарегистрироваться</RouterLink>
       </span>
     </div>
   </div>

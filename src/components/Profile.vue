@@ -18,8 +18,8 @@ const logout = () => {
 
 <template>
   <div class="flex flex-col gap-5">
-    <h1>Hello {{ user.name }}!</h1>
-    <Button @click="logout">Log out</Button>
+    <h1>Здравствуйте, {{ user.name }}!</h1>
+    <Button @click="logout">Выйти</Button>
   </div>
 </template>
 

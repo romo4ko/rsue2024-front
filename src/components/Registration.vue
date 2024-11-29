@@ -32,7 +32,7 @@ function register(ev) {
   <div class="flex flex-col justify-center px-5 py-5 bg-[#1e1e1e] rounded-xl w-full max-w-[350px]">
     <div class="gap-4 flex flex-col">
       <h1 class="text-2xl">
-        Registration
+        Регистрация
       </h1>
       <div class="flex flex-col gap-4">
         <FloatLabel variant="on">
@@ -57,12 +57,12 @@ function register(ev) {
         </FloatLabel>
         <FloatLabel variant="on">
           <InputText class="input" id="password" v-model="user.password" />
-          <label for="password">Логин</label>
+          <label for="password">Пароль</label>
         </FloatLabel>
       </div>
-      <Button @click="register">Submit</Button>
+      <Button @click="register">Отправить</Button>
       <span>
-        Already have an account? <RouterLink to="/login">Login</RouterLink>
+        Уже есть аккаунт? <RouterLink to="/login">Логин</RouterLink>
       </span>
     </div>
   </div>
