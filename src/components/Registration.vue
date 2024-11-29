@@ -6,11 +6,11 @@ import useRegistrationStore from "../store/index.js";
 import router from "../router.js";
 
 const user = ref({
-  name: "Alexander",
-  surname: "Kovalenko",
-  patronymic: "Sergeevich",
-  email: "alexander@gmail.com",
-  password: "123456789"
+  name: "",
+  surname: "",
+  patronymic: "",
+  email: "",
+  password: ""
 })
 
 const registration = useRegistrationStore();
