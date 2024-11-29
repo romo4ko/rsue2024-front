@@ -7,7 +7,7 @@ import router from "../router.js";
 import FloatLabel from "primevue/floatlabel";
 
 const authorization = ref({
-  email: null,
+  login: null,
   password: null
 })
 
@@ -31,8 +31,8 @@ function login(ev) {
       </h1>
       <div class="flex flex-col gap-4">
         <FloatLabel variant="on">
-          <InputText class="input" id="email" v-model="authorization.email" />
-          <label for="email">Почта</label>
+          <InputText class="input" id="login" v-model="authorization.login" />
+          <label for="login">Логин</label>
         </FloatLabel>
         <FloatLabel variant="on">
           <InputText class="input" id="password" v-model="authorization.password" />

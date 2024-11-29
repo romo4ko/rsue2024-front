@@ -12,7 +12,8 @@ const user = ref({
   patronymic: "",
   login: "",
   email: "",
-  password: ""
+  password: "",
+  role: "parent"
 })
 
 const registration = useRegistrationStore();
