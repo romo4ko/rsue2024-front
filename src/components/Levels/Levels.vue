@@ -5,8 +5,27 @@ import {ref} from "vue";
 import FloatLabel from "primevue/floatlabel";
 import Dialog from "primevue/dialog";
 import useRole from "../../composables/useRole.js";
+import useLevelStore from "../../store/useLevelStore.js";
+import {useRoute} from "vue-router";
+
+const route = useRoute();
 const visible = ref(false)
 const role = useRole();
+const programId = route.params.id
+const { addLevel } = useLevelStore()
+
+const formLevel = ref({
+  name: '',
+  theory: ''
+})
+
+function addingLevel(ev) {
+  ev.preventDefault();
+
+  addLevel(programId, formLevel.value).then((resp) => {
+    resp ? visible.value = false : visible.value
+  });
+}
 </script>
 
 <template>
@@ -37,10 +56,10 @@ const role = useRole();
   <Dialog v-model:visible="visible" modal header="Добавить уровень" :style="{ width: '25rem' }">
     <div class="flex flex-col gap-4 py-3">
       <FloatLabel variant="on">
-        <InputText class="input" id="stage-name" />
+        <InputText class="input" id="stage-name" v-model="formLevel.name" />
         <label for="name1">Название уровня</label>
       </FloatLabel>
-      <Button class="w-full">
+      <Button class="w-full" @click="addingLevel">
         Добавить
       </Button>
     </div>
