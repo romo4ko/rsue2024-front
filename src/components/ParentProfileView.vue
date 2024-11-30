@@ -31,13 +31,30 @@ function addingChild(ev) {
   ev.preventDefault();
 
   addChild(formChild.value).then((resp) => {
-    resp ? visible.value = false : visible.value
+    if (resp) {
+      visible.value = false
+      childrenList()
+
+      formChild.value = {
+        parentId: profile.id,
+        name: '',
+        surname: '',
+        patronymic: '',
+        login: '',
+        password: '',
+        role: 'student'
+      }
+    }
   });
 }
 
-onMounted(async () => {
-  children.value = await getChildrenList(profile.id)
+onMounted(() => {
+  childrenList()
 })
+
+async function childrenList() {
+  children.value = await getChildrenList(profile.id)
+}
 </script>
 
 <template>

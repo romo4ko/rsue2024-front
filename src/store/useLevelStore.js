@@ -13,6 +13,17 @@ const useLevelStore = defineStore("addLevel", {
                 throw error;
             }
         },
+
+        async getLevelsList(programId) {
+            try {
+                const {data} = await axiosClient.get(`/programs/${programId}/lessons/`)
+
+                return data
+            } catch (error) {
+                console.error(error);
+                throw error;
+            }
+        }
     },
 });
 
