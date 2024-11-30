@@ -7,7 +7,6 @@ import {onMounted, ref} from "vue";
 import useRegistrationStore from "../store/useRegistrationStore.js";
 import useParentProfileStore from "../store/useParentProfileStore.js";
 
-// const { children } = useChildren()
 const visible = ref(false)
 
 const profile = useRegistrationStore().user.data;

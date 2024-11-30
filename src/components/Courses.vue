@@ -1,10 +1,14 @@
 <script setup>
-import {Button, Card} from "primevue";
+import { ref, onMounted, computed } from 'vue';
+import { Button, Card, InputText } from "primevue";
 import useCoursesStore from "../store/useCoursesStore.js";
 import router from "../router.js";
-import {onMounted} from "vue";
+import FloatLabel from "primevue/floatlabel";
 
 const coursesStore = useCoursesStore();
+
+const minAge = ref(null);
+const maxAge = ref(null);
 
 const redirect = (id) => {
   router.push({
@@ -15,14 +19,50 @@ const redirect = (id) => {
 onMounted(async () => {
   await coursesStore.getCourses();
 });
+
+const filteredCourses = computed(() => {
+  return coursesStore.courses.filter(course => {
+    const courseMinAge = course.min_student_age;
+    const courseMaxAge = course.max_student_age;
+
+    const max = maxAge.value ? maxAge.value : courseMaxAge
+
+    return (
+        (minAge.value === null || courseMinAge >= minAge.value) &&
+        (maxAge.value === null || courseMaxAge <= max)
+    );
+  });
+});
+
 </script>
 
 <template>
   <div class="wrapper">
-    <h1 class="text-3xl">Курсы платформы:</h1>
+    <h1 class="text-3xl mb-5">Курсы платформы:</h1>
+    <p class="mb-3">Фильтрация по возрасту:</p>
+    <div class="flex gap-3 px-[20px] py-[15px] rounded-[10px] shadow-card w-fit">
+      <FloatLabel variant="on">
+        <InputText
+            class="input"
+            id="min-age"
+            type="number"
+            v-model.number="minAge"
+        />
+        <label for="min-age">Минимальный возраст</label>
+      </FloatLabel>
+      <FloatLabel variant="on">
+        <InputText
+            class="input"
+            id="max-age"
+            type="number"
+            v-model.number="maxAge"
+        />
+        <label for="max-age">Максимальный возраст</label>
+      </FloatLabel>
+    </div>
     <div class="courses">
       <Card
-          v-for="course in coursesStore.courses"
+          v-for="course in filteredCourses"
           :key="course.id"
           class="card"
       >
@@ -31,6 +71,9 @@ onMounted(async () => {
         </template>
         <template #title>{{ course.name }}</template>
         <template #content>
+          <div class="bg-blue-300 w-fit text-[#fff] p-[5px] rounded-[5px] font-light mb-3">
+            {{ course.min_student_age }} - {{ course.max_student_age }} лет
+          </div>
           <p class="card-description">{{ course.description }}</p>
         </template>
         <template #footer v-if="role !== 'parent'">
@@ -46,6 +89,11 @@ onMounted(async () => {
     </div>
   </div>
 </template>
+
+<style scoped>
+/* Добавьте стили по желанию */
+</style>
+
 
 <style scoped>
 .wrapper {
