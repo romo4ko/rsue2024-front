@@ -1,13 +1,12 @@
 <script setup>
 import DeleteIcon from "./Icons/DeleteIcon.vue";
-import {Button, InputText} from "primevue";
+import {Avatar, Button, InputText} from "primevue";
 import FloatLabel from "primevue/floatlabel";
 import Dialog from 'primevue/dialog';
 import {onMounted, ref} from "vue";
 import useRegistrationStore from "../store/useRegistrationStore.js";
 import useParentProfileStore from "../store/useParentProfileStore.js";
 
-// const { children } = useChildren()
 const visible = ref(false)
 
 const profile = useRegistrationStore().user.data;
@@ -65,13 +64,14 @@ async function childrenList() {
       <div class="flex flex-col gap-3 mb-3">
         <div v-for="(child, index) in children" :key="index" class="flex items-center justify-between px-[20px] py-[15px] rounded-[10px] shadow-card w-full">
           <div class="flex items-center gap-3">
-            <div class="w-14 h-14 rounded-full overflow-hidden">
-              <img class="w-full h-full" :src="child.image" alt=".">
+            <div class="w-14 h-14 overflow-hidden">
+              <img v-if="child.image" class="w-full h-full rounded-full" :src="child.image" alt=".">
+              <Avatar :label="child.name[0]" class="mr-2" size="large" style="background-color: #ece9fc; color: #2a1261"/>
             </div>
             <div class="mx-auto">
-              <a href="" class="text-black">
+              <RouterLink :to="'/profile/student/' + child.id" href="" class="text-black">
                 {{ child.name }}
-              </a>
+              </RouterLink>
             </div>
           </div>
 <!--          <a href="" class="w-[10px] h-[10px]">-->
@@ -90,9 +90,9 @@ async function childrenList() {
   </div>
   <div class="w-[40%]">
     <div class="flex justify-center w-full">
-      <div class="w-[200px] h-[200px] rounded-full overflow-hidden mb-8">
-        <img v-if="profile.image" class="w-full h-full object-cover" :src="profile.image" alt=".">
-        <img v-else class="w-full h-full object-cover" src="/public/no-image.png" alt=".">
+      <div class="w-[200px] h-[200px] overflow-hidden mb-8">
+        <img v-if="profile.image" class="w-full rounded-full h-full object-cover" :src="profile.image" alt=".">
+        <Avatar v-else :label="profile.name[0]" class="!w-full !h-full" size="large" style="background-color: #ece9fc; color: #2a1261"/>
       </div>
     </div>
     <div class="flex flex-col gap-7">
