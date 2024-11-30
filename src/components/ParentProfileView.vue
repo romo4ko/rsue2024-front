@@ -16,7 +16,7 @@ const fio = `${profile.surname} ${profile.name} ${profile.patronymic}`
 const children = ref([])
 
 const formChild = ref({
-  parent_id: profile.id,
+  parentId: profile.id,
   name: '',
   surname: '',
   patronymic: '',
