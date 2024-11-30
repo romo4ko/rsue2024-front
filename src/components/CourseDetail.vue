@@ -43,7 +43,7 @@ onMounted(async () => {
       </section>
       <section class="info-right">
         <img class="w-[500px] h-[300px] object-cover rounded-md" :src="courseStore.course.image" alt="">
-        <Button v-if="role !== 'parent'" @click="joinCourseHandler" label="Поступить на курс"/>
+        <Button v-if="role !== 'parent'" @click="joinCourseHandler" label="Открыть"/>
       </section>
     </div>
   </div>
