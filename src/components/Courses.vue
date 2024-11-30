@@ -27,7 +27,7 @@ onMounted(async () => {
           class="card"
       >
         <template #header>
-          <img alt="user header" :src="course.image"/>
+          <img alt="user header" class="h-[250px] w-full object-cover" :src="course.image"/>
         </template>
         <template #title>{{ course.name }}</template>
         <template #content>

@@ -5,10 +5,17 @@ import {onMounted} from "vue";
 import {RouterLink} from "vue-router";
 import {useRoute} from "vue-router";
 import useRole from "../composables/useRole.js";
+import router from "../router.js";
 
 const courseStore = useDetailCourseStore();
 const role = useRole();
 const route = useRoute();
+
+const joinCourseHandler = () => {
+  router.push({
+    name: "Levels",
+  });
+}
 
 onMounted(async () => {
   await courseStore.getCourse(route.params.id);
@@ -36,7 +43,7 @@ onMounted(async () => {
       </section>
       <section class="info-right">
         <img class="w-[500px] h-[300px] object-cover rounded-md" :src="courseStore.course.image" alt="">
-        <Button v-if="role !== 'parent'" label="Поступить на курс"/>
+        <Button v-if="role !== 'parent'" @click="joinCourseHandler" label="Поступить на курс"/>
       </section>
     </div>
   </div>
