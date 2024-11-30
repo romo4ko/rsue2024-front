@@ -3,7 +3,7 @@ import {ref} from "vue";
 import {Button, InputText} from "primevue";
 import FloatLabel from 'primevue/floatlabel';
 import {RouterLink} from "vue-router";
-import useRegistrationStore from "../store/index.js";
+import useRegistrationStore from "../store/useRegistrationStore.js";
 import router from "../router.js";
 
 const user = ref({

@@ -2,12 +2,14 @@ import {createRouter, createWebHistory} from "vue-router";
 import Registration from "./components/Registration.vue";
 import Login from "./components/Login.vue";
 import Profile from "./components/Profile.vue";
-import useRegistrationStore from "./store";
+import useRegistrationStore from "./store/useRegistrationStore.js";
+import Courses from "./components/Courses.vue";
 
 const routes = [
     {path: "/registration", component: Registration, name: "Register"},
     {path: "/login", component: Login, name: "Login"},
     {path: "/profile", component: Profile, name: "Profile", meta: {requiresAuth: true}},
+    {path: "/courses", component: Courses, name: "Courses", meta: {requiresAuth: true}},
 ];
 
 const router = createRouter({

@@ -1,6 +1,6 @@
 <script setup>
 import {Avatar, Button, Popover} from "primevue";
-import useRegistrationStore from "../../store/index.js";
+import useRegistrationStore from "../../store/useRegistrationStore.js";
 import {ref} from "vue";
 import router from "../../router.js";
 import {getNav} from "../../helpers/getNav.js";
@@ -67,6 +67,6 @@ const navList = getNav(user.roles[0].name);
 }
 
 .nav-item {
-  @apply text-black hover:text-orange-400 hover:underline;
+  @apply text-black hover:text-indigo-500 hover:underline;
 }
 </style>

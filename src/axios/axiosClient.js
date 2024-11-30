@@ -1,5 +1,5 @@
 import axios from "axios";
-import useRegistrationStore from "../store";
+import useRegistrationStore from "../store/useRegistrationStore.js";
 
 const axiosClient = axios.create({
     baseURL: `${import.meta.env.VITE_API_BASE_URL}/api`,

@@ -2,7 +2,7 @@
 import {ref} from "vue";
 import {Button, InputText} from "primevue";
 import {RouterLink} from "vue-router";
-import useRegistrationStore from "../store/index.js";
+import useRegistrationStore from "../store/useRegistrationStore.js";
 import router from "../router.js";
 import FloatLabel from "primevue/floatlabel";
 

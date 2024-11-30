@@ -15,7 +15,7 @@ router.isReady().then(() => {
 <template>
   <Header v-if="!(route.name === 'Register' || route.name === 'Login')" />
   <div class="flex flex-col items-center justify-center h-full">
-    <RouterView/>
+    <RouterView />
   </div>
 </template>
 

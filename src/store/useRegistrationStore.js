@@ -48,16 +48,6 @@ const useRegistrationStore = defineStore("registration", {
             }
         },
 
-        async getCategories() {
-            try {
-                const {data} = await axiosClient.get("/categories");
-                return data;
-            } catch (error) {
-                console.error(error);
-                throw error;
-            }
-        },
-
         setUser(user) {
             this.user.data = user;
             sessionStorage.setItem("USER", JSON.stringify(user));

@@ -2,7 +2,7 @@ export const getNav = (role) => {
     switch (role) {
         case 'parent':
             return [
-                {name: "Курсы", routeName: "сourses"},
+                {name: "Курсы", routeName: "courses"},
                 {name: "Оценки детей", routeName: "kid-marks"},
                 {name: "Профиль", routeName: "profile"},
             ];

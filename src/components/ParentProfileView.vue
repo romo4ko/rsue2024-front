@@ -32,13 +32,13 @@ const visible = ref(false)
           </a>
         </div>
       </div>
-      <button
-          class="w-full px-[20px] py-[15px] bg-[#646cff] text-[#fff] rounded-[10px] hover:bg-[#757cff]"
+      <Button
+          class="w-full"
           label="Show"
           @click="visible = true"
       >
         Добавить ребенка
-      </button>
+      </Button>
     </div>
   </div>
   <div class="w-[40%]">
@@ -86,9 +86,9 @@ const visible = ref(false)
         <InputText class="input" id="password1" />
         <label for="password1">Пароль</label>
       </FloatLabel>
-      <button class="w-full px-[20px] py-[15px] bg-[#646cff] text-[#fff] rounded-[10px] hover:bg-[#757cff]">
+      <Button class="w-full">
         Отправить
-      </button>
+      </Button>
     </div>
   </Dialog>
 </template>
