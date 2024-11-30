@@ -2,6 +2,10 @@
 import {InputText} from "primevue";
 import FloatLabel from "primevue/floatlabel";
 import {useAchivements} from "../composables/useAchivements.ts";
+import useRegistrationStore from "../store/useRegistrationStore.js";
+
+const profile = useRegistrationStore().user.data;
+const fio = `${profile.surname} ${profile.name} ${profile.patronymic}`
 
 const { achivements } = useAchivements()
 </script>
@@ -19,16 +23,17 @@ const { achivements } = useAchivements()
   <div class="w-[40%]">
     <div class="flex justify-center w-full">
       <div class="w-[200px] h-[200px] rounded-full overflow-hidden mb-8">
-        <img class="w-full h-full object-cover" src="/public/images.jpeg" alt=".">
+        <img v-if="profile.image" class="w-full h-full object-cover" :src="profile.image" alt=".">
+        <img v-else class="w-full h-full object-cover" src="/public/no-image.png" alt=".">
       </div>
     </div>
     <div class="flex flex-col gap-7">
       <FloatLabel>
-        <InputText class="input" id="name" default-value="Иванов Петр Иванович" disabled />
+        <InputText class="input" id="name" :default-value="fio" disabled />
         <label for="name">ФИО</label>
       </FloatLabel>
       <FloatLabel>
-        <InputText class="input" id="login" default-value="vanya" disabled />
+        <InputText class="input" id="login" :default-value="profile.login" disabled />
         <label for="login">Логин</label>
       </FloatLabel>
     </div>
