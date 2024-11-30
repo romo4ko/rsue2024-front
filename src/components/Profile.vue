@@ -5,9 +5,9 @@ import TeacherProfileView from "./TeacherProfileView.vue";
 </script>
 
 <template>
-  <!--  <parent-profile-view />-->
+    <parent-profile-view />
 <!--  <child-profile-view />-->
-  <teacher-profile-view />
+<!--  <teacher-profile-view />-->
 </template>
 
 <style scoped>

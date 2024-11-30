@@ -67,23 +67,23 @@ const visible = ref(false)
   <Dialog v-model:visible="visible" modal header="Добавить ребенка" :style="{ width: '25rem' }">
     <div class="flex flex-col gap-4 py-3">
       <FloatLabel variant="on">
-        <InputText class="input" id="name1" />
+        <InputText class="input" id="name-child" />
         <label for="name1">Имя</label>
       </FloatLabel>
       <FloatLabel variant="on">
-        <InputText class="input" id="surname1" />
+        <InputText class="input" id="surname-child" />
         <label for="surname1">Фамилия</label>
       </FloatLabel>
       <FloatLabel variant="on">
-        <InputText class="input" id="patronymic1" />
+        <InputText class="input" id="patronymic-child" />
         <label for="patronymic1">Отчество</label>
       </FloatLabel>
       <FloatLabel variant="on">
-        <InputText class="input" id="login1" />
+        <InputText class="input" id="login-child" />
         <label for="login1">Логин</label>
       </FloatLabel>
       <FloatLabel variant="on">
-        <InputText class="input" id="password1" />
+        <InputText class="input" id="password-child" />
         <label for="password1">Пароль</label>
       </FloatLabel>
       <Button class="w-full">
