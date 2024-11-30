@@ -2,12 +2,15 @@
 import ParentProfileView from "./ParentProfileView.vue";
 import ChildProfileView from "./ChildProfileView.vue";
 import TeacherProfileView from "./TeacherProfileView.vue";
+import useRegistrationStore from "../store/useRegistrationStore.js";
+
+const role = useRegistrationStore().user.data.roles[0].name;
 </script>
 
 <template>
-    <parent-profile-view />
-<!--  <child-profile-view />-->
-<!--  <teacher-profile-view />-->
+  <parent-profile-view v-if="role === 'parent'"/>
+  <child-profile-view v-if="role === 'child'"/>
+  <teacher-profile-view v-if="role === 'teacher'"/>
 </template>
 
 <style scoped>
