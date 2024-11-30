@@ -5,9 +5,34 @@ import {Button, InputText} from "primevue";
 import FloatLabel from "primevue/floatlabel";
 import Dialog from 'primevue/dialog';
 import {ref} from "vue";
+import useRegistrationStore from "../store/useRegistrationStore.js";
+import useParentProfileStore from "../store/useParentProfileStore.js";
 
 const { children } = useChildren()
 const visible = ref(false)
+
+const profile = useRegistrationStore().user.data;
+const fio = `${profile.surname} ${profile.name} ${profile.patronymic}`
+
+const formChild = ref({
+  parent_id: profile.id,
+  name: '',
+  surname: '',
+  patronymic: '',
+  login: '',
+  password: '',
+  role: 'student'
+})
+
+const addingChild = useParentProfileStore()
+
+function addChild(ev) {
+  ev.preventDefault();
+
+  addingChild.addChild(formChild.value).then((resp) => {
+    resp ? visible.value = false : visible.value
+  });
+}
 </script>
 
 <template>
@@ -44,20 +69,21 @@ const visible = ref(false)
   <div class="w-[40%]">
     <div class="flex justify-center w-full">
       <div class="w-[200px] h-[200px] rounded-full overflow-hidden mb-8">
-        <img class="w-full h-full object-cover" src="/public/woman.jpg" alt=".">
+        <img v-if="profile.image" class="w-full h-full object-cover" :src="profile.image" alt=".">
+        <img v-else class="w-full h-full object-cover" src="/public/no-image.png" alt=".">
       </div>
     </div>
     <div class="flex flex-col gap-7">
       <FloatLabel>
-        <InputText class="input" id="name" default-value="Иванова Марина Семеновна" disabled />
+        <InputText class="input" id="name" :default-value="fio" disabled />
         <label for="name">ФИО</label>
       </FloatLabel>
       <FloatLabel>
-        <InputText class="input" id="mail" default-value="semenovna@mail.com" disabled />
+        <InputText class="input" id="mail" :default-value="profile.email" disabled />
         <label for="mail">Email</label>
       </FloatLabel>
       <FloatLabel>
-        <InputText class="input" id="login" default-value="durnaya" disabled />
+        <InputText class="input" id="login" :default-value="profile.login" disabled />
         <label for="login">Логин</label>
       </FloatLabel>
     </div>
@@ -67,26 +93,26 @@ const visible = ref(false)
   <Dialog v-model:visible="visible" modal header="Добавить ребенка" :style="{ width: '25rem' }">
     <div class="flex flex-col gap-4 py-3">
       <FloatLabel variant="on">
-        <InputText class="input" id="name-child" />
+        <InputText class="input" id="name-child" v-model="formChild.name" />
         <label for="name1">Имя</label>
       </FloatLabel>
       <FloatLabel variant="on">
-        <InputText class="input" id="surname-child" />
+        <InputText class="input" id="surname-child" v-model="formChild.surname" />
         <label for="surname1">Фамилия</label>
       </FloatLabel>
       <FloatLabel variant="on">
-        <InputText class="input" id="patronymic-child" />
+        <InputText class="input" id="patronymic-child" v-model="formChild.patronymic" />
         <label for="patronymic1">Отчество</label>
       </FloatLabel>
       <FloatLabel variant="on">
-        <InputText class="input" id="login-child" />
+        <InputText class="input" id="login-child" v-model="formChild.login" />
         <label for="login1">Логин</label>
       </FloatLabel>
       <FloatLabel variant="on">
-        <InputText class="input" id="password-child" />
+        <InputText class="input" id="password-child" v-model="formChild.password" />
         <label for="password1">Пароль</label>
       </FloatLabel>
-      <Button class="w-full">
+      <Button class="w-full" @click="addChild">
         Отправить
       </Button>
     </div>
