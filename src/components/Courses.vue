@@ -1,33 +1,45 @@
 <script setup>
-import {Card, Button} from "primevue";
+import {Button, Card} from "primevue";
 import useCoursesStore from "../store/useCoursesStore.js";
-import useRegistrationStore from "../store/useRegistrationStore.js";
+import router from "../router.js";
+import {onMounted} from "vue";
 
-const courses = useCoursesStore().courses;
+const coursesStore = useCoursesStore();
 
-const role = useRegistrationStore().user.data.roles[0].name;
+const redirect = (id) => {
+  router.push({
+    path: `/courses/${id}`,
+  });
+};
 
-console.log(courses);
-
+onMounted(async () => {
+  await coursesStore.getCourses();
+});
 </script>
 
 <template>
   <div class="wrapper">
     <h1 class="text-3xl">Курсы платформы:</h1>
     <div class="courses">
-      <Card v-for="course of courses" class="card">
+      <Card
+          v-for="course in coursesStore.courses"
+          :key="course.id"
+          class="card"
+      >
         <template #header>
-          <img alt="user header" :src="course.image" />
+          <img alt="user header" :src="course.image"/>
         </template>
-        <template #title>{{course.name}}</template>
+        <template #title>{{ course.name }}</template>
         <template #content>
-          <p class="card-description">
-            {{course.description}}
-          </p>
+          <p class="card-description">{{ course.description }}</p>
         </template>
         <template #footer v-if="role !== 'parent'">
           <div class="flex gap-4 mt-1">
-            <Button label="Перейти к курсу" class="w-full" />
+            <Button
+                @click="redirect(course.id)"
+                label="Перейти к курсу"
+                class="w-full"
+            />
           </div>
         </template>
       </Card>

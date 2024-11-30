@@ -1,16 +1,16 @@
 import axiosClient from "../axios/axiosClient.js";
 import {defineStore} from "pinia";
 
-const useCoursesStore = defineStore("courses", {
+const useDetailCourseStore = defineStore("courseDetail", {
     state: () => ({
-        courses: [],
+        course: {}
     }),
 
     actions: {
-        async getCourses() {
+        async getCourse(id) {
             try {
-                const {data} = await axiosClient.get("/programs");
-                this.setCourses(data);
+                const {data} = await axiosClient.get(`/programs/${id}`);
+                this.setCourse(data);
                 return data;
             } catch (error) {
                 console.error(error);
@@ -18,10 +18,10 @@ const useCoursesStore = defineStore("courses", {
             }
         },
 
-        setCourses(courses) {
-            this.courses = courses;
+        setCourse(course) {
+            this.course = course;
         }
     },
 });
 
-export default useCoursesStore;
+export default useDetailCourseStore;

@@ -4,12 +4,18 @@ import Login from "./components/Login.vue";
 import Profile from "./components/Profile.vue";
 import useRegistrationStore from "./store/useRegistrationStore.js";
 import Courses from "./components/Courses.vue";
+import CourseDetail from "./components/CourseDetail.vue";
+import Level from "./components/Level.vue";
+import Levels from "./components/Levels.vue";
 
 const routes = [
     {path: "/registration", component: Registration, name: "Register"},
     {path: "/login", component: Login, name: "Login"},
     {path: "/profile", component: Profile, name: "Profile", meta: {requiresAuth: true}},
     {path: "/courses", component: Courses, name: "Courses", meta: {requiresAuth: true}},
+    {path: "/courses/:id", component: CourseDetail, name: "CourseDetail", meta: {requiresAuth: true}},
+    {path: "/courses/:id/levels", component: Levels, name: "Levels", meta: {requiresAuth: true}},
+    {path: "/courses/:id/levels/:levelId", component: Level, name: "Level", meta: {requiresAuth: true}},
 ];
 
 const router = createRouter({
