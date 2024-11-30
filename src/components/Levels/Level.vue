@@ -7,7 +7,6 @@ import Step from 'primevue/step';
 import StepPanel from 'primevue/steppanel';
 import {RouterLink, useRoute} from "vue-router";
 import useDetailCourseStore from "../../store/useDetailCourseStore.js";
-import router from "../../router.js";
 import {onMounted, ref} from "vue";
 import useDetailLevelStore from "../../store/useDetailLevelStore.js";
 import useRole from "../../composables/useRole.js";
@@ -17,34 +16,35 @@ const levelStore = useDetailLevelStore();
 const role = useRole();
 const route = useRoute();
 
+const editMode = ref(false);
+
+const editModeToggle = () => {
+  editMode.value = !editMode.value;
+}
+
 // Массив для хранения значений каждого Textarea
 const answers = ref([]);
 
-const joinCourseHandler = () => {
-  router.push({
-    name: "Levels",
-  });
-};
-
-const onFormSubmit = (index) => {
-  // Обработка отправки ответа для определенного задания
-  console.log(`Ответ для задания ${index + 1}:`, answers.value[index]);
-};
-
 onMounted(async () => {
   await courseStore.getCourse(route.params.id);
+  await levelStore.getLevel(route.params.id, route.params.levelId);
 });
 </script>
 
 <template>
   <div class="wrapper">
-    <RouterLink :to="'/courses/' + route.params.id + '/levels'"><span class="pi pi-arrow-left"></span> Вернуться к
-      уровням
+    <RouterLink :to="'/courses/' + route.params.id + '/levels'">
+      <span class="pi pi-arrow-left"></span>
+      Вернуться к уровням
     </RouterLink>
     <div class="title">
-      <h2 class="text-5xl">
-        {{ courseStore.course.name }}
-      </h2>
+      <div class="flex justify-between w-full">
+        <div class="w-28"></div>
+        <h2 class="text-5xl">
+          {{ courseStore.course.name }}
+        </h2>
+        <Button :label="editMode ? 'Режим просмотра' : 'Режим редактирования'" @click="editModeToggle" />
+      </div>
       <h3 class="text-2xl">
         {{ levelStore.level.name }}
       </h3>

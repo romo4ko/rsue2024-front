@@ -46,8 +46,11 @@ async function levelsList() {
 </script>
 
 <template>
-  <div class="flex justify-between w-[100%] mb-[40px]">
-    <RouterLink :to="'/courses/' + route.params.id"><- Вернуться к курсу</RouterLink>
+  <div class="flex justify-between pt-10 w-[100%] mb-[40px]">
+    <RouterLink :to="'/courses/' + route.params.id">
+      <span class="pi pi-arrow-left"></span>
+      Вернуться к курсу
+    </RouterLink>
     <Button
         @click="visible = true"
         v-if="role === 'teacher'"
@@ -59,11 +62,11 @@ async function levelsList() {
     <h2 class="font-semibold text-[25px] mb-[40px]">Название курса</h2>
     <div class="w-full">
       <div class="flex flex-wrap gap-5 justify-self-center">
-        <div v-for="(item, index) in levels">
+        <div v-for="(item, index) in levels" class="w-[150px]">
           <div class="w-[150px] h-[150px] bg-indigo-400 rounded-full flex items-center justify-center text-[#fff] mb-3 font-semibold text-4xl">
             {{ index + 1 }}
           </div>
-          <RouterLink class="text-black" :to="'/courses/' + route.params.id + '/levels/' + item.id">
+          <RouterLink class="text-black line-clamp-1 text-ellipsis" :to="'/courses/' + route.params.id + '/levels/' + item.id">
             {{ item.name }}
           </RouterLink>
         </div >

@@ -1,5 +1,5 @@
 <script setup>
-import {Button} from "primevue";
+import {Button, Panel} from "primevue";
 import useDetailCourseStore from "../store/useDetailCourseStore.js";
 import {onMounted} from "vue";
 import {RouterLink} from "vue-router";
@@ -24,22 +24,22 @@ onMounted(async () => {
 
 <template>
   <div class="wrapper">
-    <RouterLink to="/courses"><- Вернуться к курсам</RouterLink>
+    <RouterLink to="/courses">
+      <span class="pi pi-arrow-left"></span>
+      Вернуться к курсам
+    </RouterLink>
     <div class="content">
       <section class="info-left">
         <h2 class="text-5xl mb-10">{{courseStore.course.name}}</h2>
-        <div class="info-block">
-          <h2 class="block-title">Описание:</h2>
-          <p class="max-w-[500px]">{{courseStore.course.description}}</p>
-        </div>
-        <div class="info-block">
-          <h2 class="block-title">Содержание:</h2>
+        <Panel header="Описание:" class="panel-block">
+          <p>{{courseStore.course.description}}</p>
+        </Panel>
+        <Panel header="Содержание:" class="panel-block">
           <p>Пункты содержания</p>
-        </div>
-        <div class="info-block">
-          <h2 class="block-title">Преподаватели:</h2>
+        </Panel>
+        <Panel header="Преподаватели:" class="panel-block">
           <p>Список преподов</p>
-        </div>
+        </Panel>
       </section>
       <section class="info-right">
         <img class="w-[500px] h-[300px] object-cover rounded-md" :src="courseStore.course.image" alt="">
@@ -58,12 +58,12 @@ onMounted(async () => {
   @apply flex justify-between mt-5;
 }
 
-.block-title {
-  @apply text-2xl;
+.info-left {
+  @apply flex flex-col gap-10;
 }
 
-.info-block {
-  @apply flex flex-col gap-4 mb-4;
+.panel-block {
+  @apply max-w-[500px];
 }
 
 .info-right {
