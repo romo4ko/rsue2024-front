@@ -9,7 +9,7 @@ const role = useRegistrationStore().user.data.roles[0].name;
 
 <template>
   <parent-profile-view v-if="role === 'parent'"/>
-  <child-profile-view v-if="role === 'child'"/>
+  <child-profile-view v-if="role === 'student'"/>
   <teacher-profile-view v-if="role === 'teacher'"/>
 </template>
 
