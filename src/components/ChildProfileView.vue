@@ -1,13 +1,18 @@
 <script setup>
 import {InputText} from "primevue";
 import FloatLabel from "primevue/floatlabel";
-import {useAchivements} from "../composables/useAchivements.ts";
 import useRegistrationStore from "../store/useRegistrationStore.js";
+import useAchievementsStore from "../store/useAchievementsStore.js";
+import {onMounted, ref} from "vue";
 
 const profile = useRegistrationStore().user.data;
 const fio = `${profile.surname} ${profile.name} ${profile.patronymic}`
+const { getAchievementsList } = useAchievementsStore()
+const achievements = ref([])
 
-const { achivements } = useAchivements()
+onMounted(async () => {
+  achievements.value = await getAchievementsList(profile.id)
+})
 </script>
 
 <template>
@@ -15,8 +20,8 @@ const { achivements } = useAchivements()
   <div class="text-start w-[40%]">
     <h2 class="font-semibold text-[25px] mb-[30px]">Ваши достижения</h2>
     <div class="flex flex-wrap gap-2 mb-3">
-      <div class="w-[115px] h-[115px]" v-for="(achive, index) in achivements" :key="index">
-        <img :src="achive.image" alt="." :title="achive.name">
+      <div class="w-[115px] h-[115px]" v-for="(achieve, index) in achievements" :key="index">
+        <img :src="achieve.image" alt="." :title="achieve.name">
       </div>
     </div>
   </div>
