@@ -3,10 +3,21 @@ import {defineStore} from "pinia";
 
 const useParentProfileStore = defineStore("parentProfile", {
     actions: {
-       async addChild(child) {
+        async addChild(child) {
             try {
                 const {data} = await axiosClient.post("/register", child)
 
+                return data
+            } catch (error) {
+                console.error(error);
+                throw error;
+            }
+        },
+
+        async getChildrenList(userId) {
+            try {
+                const {data} = await axiosClient.get(`/users/${userId}/childrens`)
+                console.log(data);
                 return data
             } catch (error) {
                 console.error(error);

@@ -1,18 +1,19 @@
 <script setup>
 import DeleteIcon from "./Icons/DeleteIcon.vue";
-import {useChildren} from "../composables/useChildren.ts";
 import {Button, InputText} from "primevue";
 import FloatLabel from "primevue/floatlabel";
 import Dialog from 'primevue/dialog';
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import useRegistrationStore from "../store/useRegistrationStore.js";
 import useParentProfileStore from "../store/useParentProfileStore.js";
 
-const { children } = useChildren()
+// const { children } = useChildren()
 const visible = ref(false)
 
 const profile = useRegistrationStore().user.data;
 const fio = `${profile.surname} ${profile.name} ${profile.patronymic}`
+
+const children = ref([])
 
 const formChild = ref({
   parent_id: profile.id,
@@ -24,15 +25,19 @@ const formChild = ref({
   role: 'student'
 })
 
-const addingChild = useParentProfileStore()
+const { addChild, getChildrenList } = useParentProfileStore()
 
-function addChild(ev) {
+function addingChild(ev) {
   ev.preventDefault();
 
-  addingChild.addChild(formChild.value).then((resp) => {
+  addChild(formChild.value).then((resp) => {
     resp ? visible.value = false : visible.value
   });
 }
+
+onMounted(async () => {
+  children.value = await getChildrenList(profile.id)
+})
 </script>
 
 <template>
@@ -112,7 +117,7 @@ function addChild(ev) {
         <InputText class="input" id="password-child" v-model="formChild.password" />
         <label for="password1">Пароль</label>
       </FloatLabel>
-      <Button class="w-full" @click="addChild">
+      <Button class="w-full" @click="addingChild">
         Отправить
       </Button>
     </div>
