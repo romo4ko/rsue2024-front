@@ -3,7 +3,7 @@ import './style.css'
 import App from './App.vue'
 import PrimeVue from 'primevue/config';
 import Aura from '@primevue/themes/aura';
-import { definePreset } from '@primevue/themes';
+import {definePreset} from '@primevue/themes';
 import router from './router.js';
 import {createPinia} from "pinia";
 
