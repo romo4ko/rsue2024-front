@@ -19,6 +19,29 @@ const useDetailLevelStore = defineStore("levelDetail", {
             }
         },
 
+        async updateLevelInfo(programId, levelId) {
+            try {
+                const {data} = await axiosClient.post(`/programs/${programId}/lessons/${levelId}`, this.level);
+                console.log(data);
+                this.setLevel(data);
+                return data;
+            } catch (error) {
+                console.error(error);
+                throw error;
+            }
+        },
+
+        async updateLevelExerciseInfo(programId, levelId, exerciseId, body) {
+            try {
+                const {data} = await axiosClient.post(`/programs/${programId}/lessons/${levelId}/exercises/${exerciseId}`, body);
+                console.log(data);
+                return data;
+            } catch (error) {
+                console.error(error);
+                throw error;
+            }
+        },
+
         setLevel(level) {
             this.level = level;
         }
