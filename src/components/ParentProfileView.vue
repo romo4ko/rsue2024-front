@@ -7,7 +7,6 @@ import {onMounted, ref} from "vue";
 import useRegistrationStore from "../store/useRegistrationStore.js";
 import useParentProfileStore from "../store/useParentProfileStore.js";
 
-// const { children } = useChildren()
 const visible = ref(false)
 
 const profile = useRegistrationStore().user.data;
@@ -70,9 +69,9 @@ async function childrenList() {
               <Avatar :label="child.name[0]" class="mr-2" size="large" style="background-color: #ece9fc; color: #2a1261"/>
             </div>
             <div class="mx-auto">
-              <a href="" class="text-black">
+              <RouterLink :to="'/profile/student/' + child.id" href="" class="text-black">
                 {{ child.name }}
-              </a>
+              </RouterLink>
             </div>
           </div>
 <!--          <a href="" class="w-[10px] h-[10px]">-->

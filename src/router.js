@@ -7,6 +7,7 @@ import Courses from "./components/Courses.vue";
 import CourseDetail from "./components/CourseDetail.vue";
 import Levels from "./components/Levels/Levels.vue";
 import Level from "./components/Levels/Level.vue";
+import ChildProfileView from "./components/ChildProfileView.vue";
 
 const routes = [
     {path: "/registration", component: Registration, name: "Register"},
@@ -16,6 +17,7 @@ const routes = [
     {path: "/courses/:id", component: CourseDetail, name: "CourseDetail", meta: {requiresAuth: true}},
     {path: "/courses/:id/levels", component: Levels, name: "Levels", meta: {requiresAuth: true}},
     {path: "/courses/:id/levels/:levelId", component: Level, name: "Level", meta: {requiresAuth: true}},
+    {path: "/profile/student/:studentId", component: ChildProfileView, name: "ChildProfileView", meta: {requiresAuth: true}},
 ];
 
 const router = createRouter({

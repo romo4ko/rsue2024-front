@@ -6,11 +6,13 @@ import Dialog from "primevue/dialog";
 import useRole from "../../composables/useRole.js";
 import useLevelStore from "../../store/useLevelStore.js";
 import {RouterLink, useRoute} from "vue-router";
+import useDetailCourseStore from "../../store/useDetailCourseStore.js";
 
 const route = useRoute();
 const visible = ref(false)
 const role = useRole();
 const programId = route.params.id
+const courseStore = useDetailCourseStore();
 
 const levels = ref([])
 const { addLevel, getLevelsList } = useLevelStore()
@@ -36,8 +38,9 @@ function addingLevel(ev) {
   });
 }
 
-onMounted(() => {
-  levelsList()
+onMounted(async () => {
+  await courseStore.getCourse(route.params.id);
+  await levelsList()
 })
 
 async function levelsList() {
@@ -58,18 +61,20 @@ async function levelsList() {
       Добавить уровень
     </Button>
   </div>
-  <div>
-    <h2 class="font-semibold text-[25px] mb-[40px]">Название курса</h2>
+  <h2 class="font-semibold text-[25px] mb-[40px]">
+    {{ courseStore.course.name }}
+  </h2>
+  <div class="self-start">
     <div class="w-full">
-      <div class="flex flex-wrap gap-5 justify-self-center">
-        <div v-for="(item, index) in levels" class="w-[150px]">
-          <div class="w-[150px] h-[150px] bg-indigo-400 rounded-full flex items-center justify-center text-[#fff] mb-3 font-semibold text-4xl">
+      <div class="flex flex-wrap gap-5 gap-y-7 justify-self-center">
+        <RouterLink v-for="(item, index) in levels" class="w-[227px] flex flex-col group" :to="'/courses/' + route.params.id + '/levels/' + item.id">
+          <div class="w-[150px] h-[150px] bg-indigo-400 rounded-full flex items-center justify-center text-[#fff] mb-3 font-semibold text-4xl group-hover:opacity-90 self-center">
             {{ index + 1 }}
           </div>
-          <RouterLink class="text-black line-clamp-1 text-ellipsis" :to="'/courses/' + route.params.id + '/levels/' + item.id">
+          <div class="text-black line-clamp-1 text-ellipsis">
             {{ item.name }}
-          </RouterLink>
-        </div >
+          </div>
+        </RouterLink >
       </div>
     </div>
   </div>
