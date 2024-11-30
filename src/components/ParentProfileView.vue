@@ -68,9 +68,9 @@ async function childrenList() {
               <img class="w-full h-full" :src="child.image" alt=".">
             </div>
             <div class="mx-auto">
-              <a href="" class="text-black">
+              <RouterLink :to="'/profile/student/' + child.id" href="" class="text-black">
                 {{ child.name }}
-              </a>
+              </RouterLink>
             </div>
           </div>
 <!--          <a href="" class="w-[10px] h-[10px]">-->

@@ -3,16 +3,27 @@ import {InputText} from "primevue";
 import FloatLabel from "primevue/floatlabel";
 import useRegistrationStore from "../store/useRegistrationStore.js";
 import useAchievementsStore from "../store/useAchievementsStore.js";
-import {onMounted, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
+import useChildProfileStore from "../store/useChildProfileStore.js";
+import {useRoute} from "vue-router";
 
-const profile = useRegistrationStore().user.data;
-const fio = `${profile.surname} ${profile.name} ${profile.patronymic}`
+const route = useRoute()
 const { getAchievementsList } = useAchievementsStore()
 const achievements = ref([])
+const { getChild } = useChildProfileStore()
+const profile = ref(useRegistrationStore().user.data);
 
 onMounted(async () => {
-  achievements.value = await getAchievementsList(profile.id)
+  if (route.params.studentId) {
+    const child = await getChild(route.params.studentId)
+
+    profile.value = child.user
+  }
+
+  achievements.value = await getAchievementsList(profile.value.id)
 })
+
+const fio = computed(() => `${profile.value.surname} ${profile.value.name} ${profile.value.patronymic}`);
 </script>
 
 <template>
