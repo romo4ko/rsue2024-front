@@ -17,7 +17,7 @@ onMounted(async () => {
 
 <template>
   <div class="wrapper">
-    <RouterLink to=""><- Вернуться к курсам</RouterLink>
+    <RouterLink to="/courses"><- Вернуться к курсам</RouterLink>
     <div class="content">
       <section class="info-left">
         <h2 class="text-5xl mb-10">{{courseStore.course.name}}</h2>
@@ -48,7 +48,7 @@ onMounted(async () => {
 }
 
 .content {
-  @apply flex justify-between;
+  @apply flex justify-between mt-5;
 }
 
 .block-title {

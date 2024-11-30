@@ -5,8 +5,8 @@ import Profile from "./components/Profile.vue";
 import useRegistrationStore from "./store/useRegistrationStore.js";
 import Courses from "./components/Courses.vue";
 import CourseDetail from "./components/CourseDetail.vue";
-import Level from "./components/Level.vue";
-import Levels from "./components/Levels.vue";
+import Levels from "./components/Levels/Levels.vue";
+import Level from "./components/Levels/Level.vue";
 
 const routes = [
     {path: "/registration", component: Registration, name: "Register"},
