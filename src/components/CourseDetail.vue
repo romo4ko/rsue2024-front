@@ -35,10 +35,14 @@ onMounted(async () => {
           <p>{{courseStore.course.description}}</p>
         </Panel>
         <Panel header="Содержание:" class="panel-block">
-          <p>Пункты содержания</p>
+          <ul>
+            <li v-for="course of courseStore.course.lessons">• {{course}}</li>
+          </ul>
         </Panel>
         <Panel header="Преподаватели:" class="panel-block">
-          <p>Список преподов</p>
+          <ul>
+            <li v-for="teacher of courseStore.course.teachers">• {{teacher}}</li>
+          </ul>
         </Panel>
       </section>
       <section class="info-right">
@@ -59,7 +63,7 @@ onMounted(async () => {
 }
 
 .info-left {
-  @apply flex flex-col gap-10;
+  @apply flex flex-col gap-10 mb-10;
 }
 
 .panel-block {
