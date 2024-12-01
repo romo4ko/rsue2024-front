@@ -18,6 +18,7 @@ export const getNav = (role) => {
                 {name: "Курсы", routeName: "/courses"},
                 {name: "Мое обучение", routeName: "/my-courses"},
                 {name: "Профиль", routeName: "/profile"},
+                {name: "Магазин аватарок", routeName: "/avatars-store"},
             ];
         default:
             return [];
