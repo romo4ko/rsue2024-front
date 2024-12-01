@@ -8,8 +8,9 @@ import useRegistrationStore from "../store/useRegistrationStore.js";
 import useParentProfileStore from "../store/useParentProfileStore.js";
 
 const visible = ref(false)
-
-const profile = useRegistrationStore().user.data;
+const registrationStore = useRegistrationStore()
+const profile = registrationStore.user.data;
+const tgUsername = ref(profile.telegram_username)
 const fio = `${profile.surname} ${profile.name} ${profile.patronymic}`
 
 const children = ref([])
@@ -24,7 +25,7 @@ const formChild = ref({
   role: 'student'
 })
 
-const { addChild, getChildrenList } = useParentProfileStore()
+const { addChild, getChildrenList, addTelegramUsername } = useParentProfileStore()
 
 function addingChild(ev) {
   ev.preventDefault();
@@ -54,6 +55,14 @@ onMounted(() => {
 async function childrenList() {
   children.value = await getChildrenList(profile.id)
 }
+
+async function addingTelegramUsername() {
+  await addTelegramUsername(tgUsername.value)
+  await registrationStore.getUser(profile.id)
+  await window.location.reload()
+  await window.open('https://t.me/hackathon_zhaba_bot', '_blank');
+}
+
 </script>
 
 <template>
@@ -108,6 +117,17 @@ async function childrenList() {
         <InputText class="input" id="login" :default-value="profile.login" disabled />
         <label for="login">Логин</label>
       </FloatLabel>
+      <div class="text-start">
+        <div class="mb-1">
+          Подключить уведомления в Telegram
+        </div>
+        <div class="flex items-center gap-2">
+          <InputText class="input" id="telegram-login" placeholder="Введите имя пользователя Telegram" v-model="tgUsername" />
+          <Button @click="addingTelegramUsername">
+            Подключить
+          </Button>
+        </div>
+      </div>
     </div>
   </div>
 </div>

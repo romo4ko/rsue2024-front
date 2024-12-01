@@ -23,7 +23,21 @@ const useParentProfileStore = defineStore("parentProfile", {
                 console.error(error);
                 throw error;
             }
-        }
+        },
+
+        async addTelegramUsername(username) {
+            console.log(username);
+            try {
+                if (username) {
+                    const {data} = await axiosClient.post("/users/tg/store", {username: username})
+
+                    return data
+                }
+            } catch (error) {
+                console.error(error);
+                throw error;
+            }
+        },
     },
 });
 
