@@ -8,18 +8,24 @@ import CourseDetail from "./components/CourseDetail.vue";
 import Levels from "./components/Levels/Levels.vue";
 import Level from "./components/Levels/Level.vue";
 import ChildProfileView from "./components/ChildProfileView.vue";
+import AvatarsStore from "./components/AvatarsStore.vue";
+import KidMark from "./components/KidMark.vue";
+import Journal from "./components/Journal.vue";
 import TeacherMarks from "./components/TeacherMarks.vue";
 
 const routes = [
     {path: "/registration", component: Registration, name: "Register"},
     {path: "/login", component: Login, name: "Login"},
     {path: "/profile", component: Profile, name: "Profile", meta: {requiresAuth: true}},
+    {path: "/kid-marks", component: KidMark, name: "KidMark", meta: {requiresAuth: true}},
+    {path: "/journal", component: Journal, name: "Journal", meta: {requiresAuth: true}},
     {path: "/courses", component: Courses, name: "Courses", meta: {requiresAuth: true}},
     {path: "/teacher-marks", component: TeacherMarks, name: "TeacherMarks", meta: {requiresAuth: true}},
     {path: "/courses/:id", component: CourseDetail, name: "CourseDetail", meta: {requiresAuth: true}},
     {path: "/courses/:id/levels", component: Levels, name: "Levels", meta: {requiresAuth: true}},
     {path: "/courses/:id/levels/:levelId", component: Level, name: "Level", meta: {requiresAuth: true}},
     {path: "/profile/student/:studentId", component: ChildProfileView, name: "ChildProfileView", meta: {requiresAuth: true}},
+    {path: "/avatars-store", component: AvatarsStore, name: "AvatarsStore", meta: {requiresAuth: true}},
 ];
 
 const router = createRouter({
