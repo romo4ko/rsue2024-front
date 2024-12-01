@@ -35,7 +35,7 @@ function login(ev) {
           <label for="login">Логин</label>
         </FloatLabel>
         <FloatLabel variant="on">
-          <InputText class="input" id="password" v-model="authorization.password" />
+          <InputText type="password" class="input" id="password" v-model="authorization.password" />
           <label for="password">Пароль</label>
         </FloatLabel>
       </div>

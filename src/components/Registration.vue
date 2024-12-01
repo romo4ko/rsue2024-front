@@ -57,7 +57,7 @@ function register(ev) {
           <label for="email">Почта</label>
         </FloatLabel>
         <FloatLabel variant="on">
-          <InputText class="input" id="password" v-model="user.password" />
+          <InputText type="password" class="input" id="password" v-model="user.password" />
           <label for="password">Пароль</label>
         </FloatLabel>
       </div>

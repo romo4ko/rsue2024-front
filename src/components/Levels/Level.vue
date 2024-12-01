@@ -1,5 +1,5 @@
 <script setup>
-import {Button, Textarea, FloatLabel, InputText} from "primevue";
+import {Button, Textarea, FloatLabel, InputText, Rating} from "primevue";
 import Stepper from 'primevue/stepper';
 import StepList from 'primevue/steplist';
 import StepPanels from 'primevue/steppanels';
@@ -29,7 +29,11 @@ const updateLevel = async () => {
 
 const updateExercise = async (exerciseId, excercise) => {
   await levelStore.updateLevelExerciseInfo(route.params.id, route.params.levelId, exerciseId, excercise);
-  window.location.reload();
+  // window.location.reload();
+}
+
+const postSolution = async (exerciseId, body) => {
+  await levelStore.postExerciseSolution(route.params.id, route.params.levelId, exerciseId, body);
 }
 
 // Массив для хранения значений каждого Textarea
@@ -75,7 +79,7 @@ onMounted(async () => {
         <Button @click="updateLevel">Подтвердить</Button>
       </div>
     </div>
-    <div class="card flex justify-center">
+    <div v-if="levelStore.level.exercises" class="card flex justify-center">
       <Stepper value="1" class="basis-[50rem]">
         <StepList>
           <Step v-for="(exercise, key) of levelStore.level.exercises" :value="String(key + 1)">
@@ -105,23 +109,43 @@ onMounted(async () => {
               <div v-if="role === 'student'" class="flex flex-col gap-4">
                 <div class="flex flex-col gap-1">
                   <Textarea
-                      v-model="answers[key]"
+                      v-model="exercise.solution.answer"
+                      :disabled="exercise.solution.status !== 'in_process'"
                       rows="5"
                       cols="30"
                       style="resize: none"
                   />
                 </div>
+                <div v-if="exercise.solution.status === 'not_confirmed'">
+                  <h2>Преподаватель проверяет ваше задание</h2>
+                </div>
+                <div v-if="exercise.solution.status === 'completed'">
+                  Задание выполнена успешно!
+                </div>
+                <div v-if="exercise.solution.mark" class="flex gap-5">
+                  <span>Оценка:</span>
+                  <Rating readonly v-model="exercise.solution.mark" />
+                </div>
+                <div v-if="exercise.solution.comment">
+                  <h2>Комментарий преподавателя:</h2>
+                  <span>
+                    {{exercise.solution.comment}}
+                  </span>
+                </div>
               </div>
             </div>
             <div class="flex pt-2 gap-8 justify-center">
               <Button class="w-full" v-if="editMode" @click="updateExercise(exercise.id, exercise)">Подтвердить</Button>
-              <Button v-if="role === 'student'" :disabled="!answers[key]" class="!px-4 w-full" label="Подтвердить"/>
+              <Button v-if="role === 'student'" :disabled="!exercise.solution.answer" @click="postSolution(exercise.id, exercise.solution.answer)" class="!px-4 w-full" label="Подтвердить"/>
               <Button v-if="key + 1 !== levelStore.level.exercises.length" label="Далее" class="w-1/3" icon="pi pi-arrow-right" iconPos="right"
                       @click="activateCallback(String(key + 2))"/>
             </div>
           </StepPanel>
         </StepPanels>
       </Stepper>
+    </div>
+    <div v-else>
+      <Button>Я ознакомился с материалом!</Button>
     </div>
   </div>
 </template>
