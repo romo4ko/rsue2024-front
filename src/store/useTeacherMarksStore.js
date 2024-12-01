@@ -47,6 +47,16 @@ const useTeacherMarksStore = defineStore("teacherMarks", {
             }
         },
 
+        async postMark(solutionId, body) {
+            try {
+                const {data} = await axiosClient.post(`/programs/${this.selectedCourse.id}/lessons/${this.selectedLesson.id}/exercises/${this.selectedExercise.id}/solutions/${solutionId}/verify`, body);
+                return data;
+            } catch (error) {
+                console.error(error);
+                throw error;
+            }
+        },
+
 
         setCourses(courses) {
             this.courses = courses;
