@@ -1,23 +1,22 @@
 <script setup>
-import StarIcon from "./Icons/StarIcon.vue";
 import {Button} from "primevue";
-import useAvatarsStore from "../store/useAvatarsStore.js";
+import useCharactersStore from "../store/useCharactersStore.js";
 import {onMounted, ref} from "vue";
 import useRegistrationStore from "../store/useRegistrationStore.js";
 import router from "../router.js";
 
-const {getAvatarsList, buyAvatar} = useAvatarsStore()
 const registrationStore = useRegistrationStore()
 const profile = registrationStore.user.data
-const avatars = ref([])
+const characters = ref([])
+const { getCharactersList, buyCharacter } = useCharactersStore()
 const route = router.resolve({name: 'Profile'});
 
 onMounted(async () => {
-  avatars.value = await getAvatarsList()
+  characters.value = await getCharactersList()
 })
 
-async function buyingAvatar(avatarId) {
-  await buyAvatar(avatarId);
+async function buyingCharacter(characterId) {
+  await buyCharacter(characterId);
   await registrationStore.getUser(profile.id)
 
   window.location.href = route.href
@@ -28,13 +27,13 @@ async function buyingAvatar(avatarId) {
   <div class="h-full py-[30px]">
     <div>
       <h2 class="font-semibold text-[25px] mb-[60px]">
-        Магазин аватарок
+        Магазин персонажей
       </h2>
     </div>
     <div class="flex flex-wrap gap-x-4 gap-y-7 pb-[50px]">
-      <div v-for="(item, index) in avatars" :key="index" class="flex flex-col items-center w-[283px]">
-        <div class="w-[130px] h-[130px] mb-3">
-          <img class="w-full h-full" :src="item.url" alt=".">
+      <div v-for="(item, index) in characters" :key="index" class="flex flex-col items-center w-[223px] h-[443px]">
+        <div class="w-[200px] h-[347px] overflow-hidden">
+          <img class="w-full h-full object-cover" :src="item.url" alt=".">
         </div>
         <div class="flex items-center gap-3 mb-4">
           <span>
@@ -42,16 +41,13 @@ async function buyingAvatar(avatarId) {
           </span>
           <star-icon />
         </div>
-        <Button class="w-full" @click="buyingAvatar(item.id)">Купить</Button>
+        <Button class="w-full" @click="buyingCharacter(item.id)">
+          Купить
+        </Button>
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-/* Добавьте стили по желанию */
-</style>
-
 
 <style scoped>
 

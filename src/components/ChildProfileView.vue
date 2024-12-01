@@ -5,6 +5,11 @@ import useRegistrationStore from "../store/useRegistrationStore.js";
 import useAchievementsStore from "../store/useAchievementsStore.js";
 import {computed, onMounted, ref} from "vue";
 import useChildProfileStore from "../store/useChildProfileStore.js";
+import Tabs from 'primevue/tabs';
+import TabList from 'primevue/tablist';
+import Tab from 'primevue/tab';
+import TabPanels from 'primevue/tabpanels';
+import TabPanel from 'primevue/tabpanel';
 import {useRoute} from "vue-router";
 import StarIcon from "./Icons/StarIcon.vue";
 
@@ -29,14 +34,29 @@ const fio = computed(() => `${profile.value.surname} ${profile.value.name} ${pro
 
 <template>
 <div class="flex justify-between w-full">
-  <div class="text-start w-[40%]">
-    <h2 class="font-semibold text-[25px] mb-[30px]">Ваши достижения</h2>
-    <div class="flex flex-wrap gap-2 mb-3">
-      <div class="w-[115px] h-[115px]" v-for="(achieve, index) in achievements" :key="index">
-        <img :src="achieve.image" alt="." :title="achieve.name">
-      </div>
-    </div>
-  </div>
+  <Tabs value="0" class="w-[40%]">
+    <TabList>
+      <Tab value="0">Достижения</Tab>
+      <Tab value="1">Персонаж</Tab>
+    </TabList>
+    <TabPanels>
+      <TabPanel value="0">
+        <div class="text-start">
+          <h2 class="font-semibold text-[25px] mb-[30px]">Ваши достижения</h2>
+          <div class="flex flex-wrap gap-2 mb-3">
+            <div class="w-[115px] h-[115px]" v-for="(achieve, index) in achievements" :key="index">
+              <img :src="achieve.image" alt="." :title="achieve.name">
+            </div>
+          </div>
+        </div>
+      </TabPanel>
+      <TabPanel value="1">
+        <div class="w-[200px] h-[347px] overflow-hidden justify-self-center">
+          <img class="w-full h-full object-cover" src="/public/testpers.png" alt=".">
+        </div>
+      </TabPanel>
+    </TabPanels>
+  </Tabs>
   <div class="w-[40%]">
     <div class="flex justify-center w-full">
       <div class="w-[200px] h-[200px] overflow-hidden mb-8">

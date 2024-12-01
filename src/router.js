@@ -8,10 +8,10 @@ import CourseDetail from "./components/CourseDetail.vue";
 import Levels from "./components/Levels/Levels.vue";
 import Level from "./components/Levels/Level.vue";
 import ChildProfileView from "./components/ChildProfileView.vue";
-import AvatarsStore from "./components/AvatarsStore.vue";
 import KidMark from "./components/KidMark.vue";
 import Journal from "./components/Journal.vue";
 import TeacherMarks from "./components/TeacherMarks.vue";
+import StoreTabs from "./components/StoreTabs.vue";
 
 const routes = [
     {path: "/registration", component: Registration, name: "Register"},
@@ -25,7 +25,7 @@ const routes = [
     {path: "/courses/:id/levels", component: Levels, name: "Levels", meta: {requiresAuth: true}},
     {path: "/courses/:id/levels/:levelId", component: Level, name: "Level", meta: {requiresAuth: true}},
     {path: "/profile/student/:studentId", component: ChildProfileView, name: "ChildProfileView", meta: {requiresAuth: true}},
-    {path: "/avatars-store", component: AvatarsStore, name: "AvatarsStore", meta: {requiresAuth: true}},
+    {path: "/store", component: StoreTabs, name: "Store", meta: {requiresAuth: true}},
 ];
 
 const router = createRouter({
