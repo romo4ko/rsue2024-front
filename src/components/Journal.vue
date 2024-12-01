@@ -34,7 +34,7 @@ function getMarks(exercises) {
         <h1 class="font-semibold text-4xl mb-[30px]">Ваши ученики</h1>
         <div class="mt-16" v-for="listKidsMark in listJournalMarks.journalMarks" :key="listKidsMark.id">
           <h2 class="font-semibold text-2xl">
-            {{ listKidsMark.name }}
+            {{ listKidsMark.full_name }}
           </h2>
 
           <Accordion :value="['0']" multiple>

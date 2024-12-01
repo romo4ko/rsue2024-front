@@ -33,12 +33,11 @@ const filteredCourses = computed(() => {
     );
   });
 });
-
 </script>
 
 <template>
   <div class="wrapper">
-    <h1 class="text-3xl mb-5">Курсы платформы:</h1>
+    <h1 class="text-3xl mb-5">Курсы платформы</h1>
     <p class="mb-3" v-if="filteredCourses.length">Фильтрация по возрасту:</p>
     <div class="flex gap-3 px-[20px] py-[15px] rounded-[10px] shadow-card w-fit" v-if="filteredCourses.length">
       <FloatLabel variant="on">

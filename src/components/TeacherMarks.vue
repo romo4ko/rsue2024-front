@@ -68,7 +68,8 @@ onMounted(async () => {
         class="select"
     />
     <div class="w-full flex flex-col gap-5" v-if="teacherMarksStore.solutions !== null">
-      <span class="text-2xl">Условие: {{ teacherMarksStore.solutions.condition }}</span>
+      <span>Условие:</span>
+      <span class="text-2xl" v-html="teacherMarksStore.solutions.condition" />
       <div class="flex gap-20">
         <div class="w-1/2 flex flex-col gap-5" v-for="solution of teacherMarksStore.solutions.solutions">
           <h2>Ученик: {{ solution.student.name }} {{ solution.student.surname }}</h2>
