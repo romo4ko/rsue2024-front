@@ -12,12 +12,14 @@ import KidMark from "./components/KidMark.vue";
 import Journal from "./components/Journal.vue";
 import TeacherMarks from "./components/TeacherMarks.vue";
 import StoreTabs from "./components/StoreTabs.vue";
+import MyCourses from "./components/MyCourses.vue";
 
 const routes = [
     {path: "/registration", component: Registration, name: "Register"},
     {path: "/login", component: Login, name: "Login"},
     {path: "/profile", component: Profile, name: "Profile", meta: {requiresAuth: true}},
     {path: "/kid-marks", component: KidMark, name: "KidMark", meta: {requiresAuth: true}},
+    {path: "/my-courses", component: MyCourses, name: "MyCourses", meta: {requiresAuth: true}},
     {path: "/journal", component: Journal, name: "Journal", meta: {requiresAuth: true}},
     {path: "/courses", component: Courses, name: "Courses", meta: {requiresAuth: true}},
     {path: "/teacher-marks", component: TeacherMarks, name: "TeacherMarks", meta: {requiresAuth: true}},

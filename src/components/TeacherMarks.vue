@@ -1,12 +1,13 @@
 <script setup>
-import {Select, Textarea, Button, InputText} from "primevue";
+import {Button, InputText, Rating, Select, Textarea} from "primevue";
 
 import useTeacherMarksStore from "../store/useTeacherMarksStore.js";
 import {computed, onMounted, ref} from "vue";
 import FloatLabel from "primevue/floatlabel";
 import Dialog from "primevue/dialog";
 
-const visible = ref(false)
+const visible = ref(false);
+const showStars = ref(false);
 const teacherMarksStore = useTeacherMarksStore();
 
 const getExercises = async () => {
@@ -26,6 +27,21 @@ const exerciseOptions = computed(() => {
   }
   return [];
 });
+
+const openCancelModal = () => {
+  visible.value = true;
+  showStars.value = false;
+}
+
+const openAcceptModal = () => {
+  visible.value = true;
+  showStars.value = true;
+}
+
+const submitModal = async (solutionId, body) => {
+  await teacherMarksStore.postMark(solutionId, body);
+  window.location.reload();
+}
 
 onMounted(async () => {
   await teacherMarksStore.getCourses();
@@ -51,29 +67,37 @@ onMounted(async () => {
         placeholder="Выберите задание"
         class="select"
     />
-    <div v-if="teacherMarksStore.solutions">
-      <span>{{ teacherMarksStore.solutions.condition }}</span>
-      <div v-for="solution of teacherMarksStore.solutions.solutions">
-        <h2>Ученик:{{ solution.student_name }}</h2>
-        <Textarea disabled v-model="solution.answer" />
-        <div>
-          <Button severity="secondary">Отклонить</Button>
-          <Button>Принять</Button>
+    <div class="w-full flex flex-col gap-5" v-if="teacherMarksStore.solutions !== null">
+      <span class="text-2xl">Условие: {{ teacherMarksStore.solutions.condition }}</span>
+      <div class="flex gap-20">
+        <div class="w-1/2 flex flex-col gap-5" v-for="solution of teacherMarksStore.solutions.solutions">
+          <h2>Ученик: {{ solution.student.name }} {{ solution.student.surname }}</h2>
+          <Textarea class="w-full" disabled v-model="solution.answer"/>
+          <div class="w-full flex gap-5">
+            <Button @click="openCancelModal" class="w-1/2" severity="secondary">Отклонить</Button>
+            <Button @click="openAcceptModal" class="w-1/2">Принять</Button>
+          </div>
+          <Dialog v-model:visible="visible" modal :style="{ width: '25rem' }">
+            <div class="flex flex-col gap-4">
+              <div v-if="showStars" class="flex gap-5">
+                <span>Поставьте оценку: </span>
+                <Rating v-model="solution.mark"/>
+              </div>
+              <FloatLabel variant="on">
+                <InputText v-model="solution.comment" class="input" id="comment"/>
+                <label for="comment">Комментарий</label>
+              </FloatLabel>
+              <Button @click="submitModal(solution.id, {mark: solution.mark, comment: solution.comment})"
+                      class="w-full">
+                Отправить
+              </Button>
+            </div>
+          </Dialog>
         </div>
       </div>
     </div>
   </div>
-  <Dialog v-model:visible="visible" modal :style="{ width: '25rem' }">
-    <div class="flex flex-col gap-4 py-3">
-      <FloatLabel variant="on">
-        <InputText class="input" id="name-child" />
-        <label for="name1">Имя</label>
-      </FloatLabel>
-      <Button class="w-full">
-        Отправить
-      </Button>
-    </div>
-  </Dialog>
+
 </template>
 
 <style scoped>

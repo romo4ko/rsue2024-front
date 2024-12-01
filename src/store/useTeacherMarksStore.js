@@ -8,7 +8,7 @@ const useTeacherMarksStore = defineStore("teacherMarks", {
         selectedCourse: null,
         selectedLesson: null,
         selectedExercise: null,
-        solutions: [],
+        solutions: null,
         exercises: []
     }),
 
@@ -40,6 +40,16 @@ const useTeacherMarksStore = defineStore("teacherMarks", {
             try {
                 const {data} = await axiosClient.get(`/programs/${this.selectedCourse.id}/lessons/${this.selectedLesson.id}/exercises/${this.selectedExercise.id}/solutions`);
                 this.setSolutions(data);
+                return data;
+            } catch (error) {
+                console.error(error);
+                throw error;
+            }
+        },
+
+        async postMark(solutionId, body) {
+            try {
+                const {data} = await axiosClient.post(`/programs/${this.selectedCourse.id}/lessons/${this.selectedLesson.id}/exercises/${this.selectedExercise.id}/solutions/${solutionId}/verify`, body);
                 return data;
             } catch (error) {
                 console.error(error);
