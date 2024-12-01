@@ -2,17 +2,17 @@ import axiosClient from "../axios/axiosClient.js";
 import {defineStore} from "pinia";
 import useRegistrationStore from "./useRegistrationStore.js";
 
-const useKidsMarksStore = defineStore("kidsMarks", {
+const useJournalMarksStore = defineStore("journalMarks", {
     state: () => ({
-        kidsMarks: {}
+        journalMarks: {}
     }),
     actions: {
         async getListKidsMarks() {
             try {
                 const userId = useRegistrationStore().user.data.id
-                const {data} = await axiosClient.get(`/users/${userId}/childrens-marks`)
+                const {data} = await axiosClient.get(`/users/${userId}/students-marks`)
 
-                this.kidsMarks = data
+                this.journalMarks = data
 
                 return data
             } catch (error) {
@@ -23,4 +23,4 @@ const useKidsMarksStore = defineStore("kidsMarks", {
     },
 });
 
-export default useKidsMarksStore;
+export default useJournalMarksStore;
