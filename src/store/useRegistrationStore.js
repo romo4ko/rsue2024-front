@@ -38,10 +38,10 @@ const useRegistrationStore = defineStore("registration", {
             this.clearUser();
         },
 
-        async getUser() {
+        async getUser(userId) {
             try {
-                const {data} = await axiosClient.get("/user");
-                this.setUser(data);
+                const {data} = await axiosClient.get("/users/" + userId);
+                this.setUser(data.user);
             } catch (error) {
                 console.error(error);
                 throw error;
