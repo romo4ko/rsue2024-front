@@ -5,7 +5,6 @@ import useTeacherMarksStore from "../store/useTeacherMarksStore.js";
 import {computed, onMounted, ref} from "vue";
 import FloatLabel from "primevue/floatlabel";
 import Dialog from "primevue/dialog";
-import Rating from 'primevue/rating';
 
 const visible = ref(false)
 const teacherMarksStore = useTeacherMarksStore();
@@ -66,7 +65,6 @@ onMounted(async () => {
   </div>
   <Dialog v-model:visible="visible" modal :style="{ width: '25rem' }">
     <div class="flex flex-col gap-4 py-3">
-      <Rating v-model="5" />
       <FloatLabel variant="on">
         <InputText class="input" id="name-child" />
         <label for="name1">Имя</label>
