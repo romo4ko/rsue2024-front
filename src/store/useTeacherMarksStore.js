@@ -8,7 +8,7 @@ const useTeacherMarksStore = defineStore("teacherMarks", {
         selectedCourse: null,
         selectedLesson: null,
         selectedExercise: null,
-        solutions: [],
+        solutions: null,
         exercises: []
     }),
 

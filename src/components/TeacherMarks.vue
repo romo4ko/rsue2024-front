@@ -48,15 +48,17 @@ onMounted(async () => {
         placeholder="Выберите задание"
         class="select"
     />
-    <div v-if="teacherMarksStore.solutions">
-      <span>{{ teacherMarksStore.solutions.condition }}</span>
-      <div v-for="solution of teacherMarksStore.solutions.solutions">
-        <h2>Ученик:{{ solution.student_name }}</h2>
-        <Textarea disabled v-model="solution.answer" />
-        <div>
-          <Button severity="secondary">Отклонить</Button>
-          <Button>Принять</Button>
-        </div>
+    <div class="w-full flex flex-col gap-5" v-if="teacherMarksStore.solutions !== null">
+      <span class="text-2xl">Условие: {{ teacherMarksStore.solutions.condition }}</span>
+      <div class="flex gap-20">
+        <div class="w-1/2 flex flex-col gap-5" v-for="solution of teacherMarksStore.solutions.solutions">
+          <h2>Ученик: {{ solution.student.name }} {{solution.student.surname}}</h2>
+          <Textarea class="w-full" disabled v-model="solution.answer" />
+          <div class="w-full flex gap-5">
+            <Button class="w-1/2" severity="secondary">Отклонить</Button>
+            <Button class="w-1/2">Принять</Button>
+          </div>
+      </div>
       </div>
     </div>
   </div>
