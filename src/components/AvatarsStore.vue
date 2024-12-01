@@ -1,6 +1,15 @@
 <script setup>
 import StarIcon from "./Icons/StarIcon.vue";
 import {Button} from "primevue";
+import useAvatarsStore from "../store/useAvatarsStore.js";
+import {onMounted, ref} from "vue";
+
+const { getAvatarsList } = useAvatarsStore()
+const avatars = ref([])
+
+onMounted(async () => {
+  avatars.value = await getAvatarsList()
+})
 </script>
 
 <template>
@@ -11,13 +20,13 @@ import {Button} from "primevue";
       </h2>
     </div>
     <div class="flex flex-wrap gap-x-4 gap-y-7 pb-[50px]">
-      <div v-for="(item, index) in 16" class="flex flex-col items-center w-[230px]">
-        <div class="w-[130px] h-[130px]">
-          <img class="w-full h-full" src="/public/store-img.png" alt=".">
+      <div v-for="(item, index) in avatars" :key="index" class="flex flex-col items-center w-[230px]">
+        <div class="w-[130px] h-[130px] mb-3">
+          <img class="w-full h-full" :src="item.url" alt=".">
         </div>
         <div class="flex items-center gap-3 mb-4">
           <span>
-            1000
+            {{ item.price }}
           </span>
           <star-icon />
         </div>
