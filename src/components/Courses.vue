@@ -39,8 +39,8 @@ const filteredCourses = computed(() => {
 <template>
   <div class="wrapper">
     <h1 class="text-3xl mb-5">Курсы платформы:</h1>
-    <p class="mb-3">Фильтрация по возрасту:</p>
-    <div class="flex gap-3 px-[20px] py-[15px] rounded-[10px] shadow-card w-fit">
+    <p class="mb-3" v-if="filteredCourses.length">Фильтрация по возрасту:</p>
+    <div class="flex gap-3 px-[20px] py-[15px] rounded-[10px] shadow-card w-fit" v-if="filteredCourses.length">
       <FloatLabel variant="on">
         <InputText
             class="input"
@@ -65,6 +65,7 @@ const filteredCourses = computed(() => {
           v-for="course in filteredCourses"
           :key="course.id"
           class="card"
+          v-if="filteredCourses.length"
       >
         <template #header>
           <img alt="user header" class="h-[250px] w-full object-cover" :src="course.image"/>
@@ -86,6 +87,9 @@ const filteredCourses = computed(() => {
           </div>
         </template>
       </Card>
+      <h2 class="text-2xl mb-5" v-if="!filteredCourses.length">
+         Ого ! вы состоите во всех курах - <router-link to="/my-courses"> нажми и зарабатывай центрики</router-link>
+      </h2>
     </div>
   </div>
 </template>
