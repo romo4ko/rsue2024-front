@@ -30,15 +30,13 @@ const updateLevel = async () => {
 
 const updateExercise = async (exerciseId, excercise) => {
   await levelStore.updateLevelExerciseInfo(route.params.id, route.params.levelId, exerciseId, excercise);
-  // window.location.reload();
+  window.location.reload();
 }
 
 const postSolution = async (exerciseId, body) => {
   await levelStore.postExerciseSolution(route.params.id, route.params.levelId, exerciseId, body);
+  window.location.reload();
 }
-
-// Массив для хранения значений каждого Textarea
-const answers = ref([]);
 
 onMounted(async () => {
   await courseStore.getCourse(route.params.id);
@@ -112,7 +110,7 @@ onMounted(async () => {
                       style="resize: none"
                   />
                 </div>
-                <div v-if="exercise.solution.status === 'not_confirmed'">
+                <div v-if="exercise.solution.status === 'not_verified'">
                   <h2>Преподаватель проверяет ваше задание</h2>
                 </div>
                 <div v-if="exercise.solution.status === 'completed'">
@@ -132,7 +130,7 @@ onMounted(async () => {
             </div>
             <div class="flex pt-2 gap-8 justify-center">
               <Button class="w-full" v-if="editMode" @click="updateExercise(exercise.id, exercise)">Подтвердить</Button>
-              <Button v-if="role === 'student'" :disabled="!exercise.solution.answer" @click="postSolution(exercise.id, exercise.solution.answer)" class="!px-4 w-full" label="Подтвердить"/>
+              <Button v-if="role === 'student'" :disabled="!exercise.solution.answer || exercise.solution.status !== 'in_process'" @click="postSolution(exercise.id, exercise.solution.answer)" class="!px-4 w-full" label="Подтвердить"/>
               <Button v-if="key + 1 !== levelStore.level.exercises.length" label="Далее" class="w-1/3" icon="pi pi-arrow-right" iconPos="right"
                       @click="activateCallback(String(key + 2))"/>
             </div>
