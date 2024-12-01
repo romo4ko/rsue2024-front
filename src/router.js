@@ -8,12 +8,14 @@ import CourseDetail from "./components/CourseDetail.vue";
 import Levels from "./components/Levels/Levels.vue";
 import Level from "./components/Levels/Level.vue";
 import ChildProfileView from "./components/ChildProfileView.vue";
+import TeacherMarks from "./components/TeacherMarks.vue";
 
 const routes = [
     {path: "/registration", component: Registration, name: "Register"},
     {path: "/login", component: Login, name: "Login"},
     {path: "/profile", component: Profile, name: "Profile", meta: {requiresAuth: true}},
     {path: "/courses", component: Courses, name: "Courses", meta: {requiresAuth: true}},
+    {path: "/teacher-marks", component: TeacherMarks, name: "TeacherMarks", meta: {requiresAuth: true}},
     {path: "/courses/:id", component: CourseDetail, name: "CourseDetail", meta: {requiresAuth: true}},
     {path: "/courses/:id/levels", component: Levels, name: "Levels", meta: {requiresAuth: true}},
     {path: "/courses/:id/levels/:levelId", component: Level, name: "Level", meta: {requiresAuth: true}},

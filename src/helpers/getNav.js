@@ -9,7 +9,7 @@ export const getNav = (role) => {
         case 'teacher':
             return [
                 {name: "Курсы", routeName: "/courses"},
-                {name: "Мои курсы", routeName: "/my-courses"},
+                {name: "Оценивание", routeName: "/teacher-marks"},
                 {name: "Журнал", routeName: "/journal"},
                 {name: "Профиль", routeName: "/profile"},
             ];
