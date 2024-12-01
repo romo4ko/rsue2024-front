@@ -9,12 +9,14 @@ import Levels from "./components/Levels/Levels.vue";
 import Level from "./components/Levels/Level.vue";
 import ChildProfileView from "./components/ChildProfileView.vue";
 import KidMark from "./components/KidMark.vue";
+import Journal from "./components/Journal.vue";
 
 const routes = [
     {path: "/registration", component: Registration, name: "Register"},
     {path: "/login", component: Login, name: "Login"},
     {path: "/profile", component: Profile, name: "Profile", meta: {requiresAuth: true}},
     {path: "/kid-marks", component: KidMark, name: "KidMark", meta: {requiresAuth: true}},
+    {path: "/journal", component: Journal, name: "Journal", meta: {requiresAuth: true}},
     {path: "/courses", component: Courses, name: "Courses", meta: {requiresAuth: true}},
     {path: "/courses/:id", component: CourseDetail, name: "CourseDetail", meta: {requiresAuth: true}},
     {path: "/courses/:id/levels", component: Levels, name: "Levels", meta: {requiresAuth: true}},
