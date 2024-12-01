@@ -6,12 +6,15 @@ import {RouterLink} from "vue-router";
 import {useRoute} from "vue-router";
 import useRole from "../composables/useRole.js";
 import router from "../router.js";
+import axiosClient from "../axios/axiosClient.js";
 
 const courseStore = useDetailCourseStore();
 const role = useRole();
 const route = useRoute();
 
 const joinCourseHandler = () => {
+  signUpProgram()
+
   router.push({
     name: "Levels",
   });
@@ -20,6 +23,11 @@ const joinCourseHandler = () => {
 onMounted(async () => {
   await courseStore.getCourse(route.params.id);
 });
+
+function signUpProgram() {
+  const {data} = axiosClient.post(`/programs/${route.params.id}`);
+  console.log(data)
+}
 </script>
 
 <template>
@@ -47,7 +55,7 @@ onMounted(async () => {
       </section>
       <section class="info-right">
         <img class="w-[500px] h-[300px] object-cover rounded-md" :src="courseStore.course.image" alt="">
-        <Button v-if="role !== 'parent'" @click="joinCourseHandler" label="Открыть"/>
+        <Button v-if="role !== 'parent'" @click="joinCourseHandler" label="Открыть" />
       </section>
     </div>
   </div>
