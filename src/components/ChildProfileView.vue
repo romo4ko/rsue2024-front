@@ -6,6 +6,7 @@ import useAchievementsStore from "../store/useAchievementsStore.js";
 import {computed, onMounted, ref} from "vue";
 import useChildProfileStore from "../store/useChildProfileStore.js";
 import {useRoute} from "vue-router";
+import StarIcon from "./Icons/StarIcon.vue";
 
 const route = useRoute()
 const { getAchievementsList } = useAchievementsStore()
@@ -43,7 +44,7 @@ const fio = computed(() => `${profile.value.surname} ${profile.value.name} ${pro
         <Avatar v-else :label="profile.name[0]" class="!w-full !h-full" size="large" style="background-color: #ece9fc; color: #2a1261"/>
       </div>
     </div>
-    <div class="flex flex-col gap-7">
+    <div class="flex flex-col gap-7 mb-8">
       <FloatLabel>
         <InputText class="input" id="name" :default-value="fio" disabled />
         <label for="name">ФИО</label>
@@ -52,6 +53,17 @@ const fio = computed(() => `${profile.value.surname} ${profile.value.name} ${pro
         <InputText class="input" id="login" :default-value="profile.login" disabled />
         <label for="login">Логин</label>
       </FloatLabel>
+    </div>
+    <div class="flex items-center gap-3">
+      <div class="text-lg">
+        Баланс:
+      </div>
+      <div class="flex items-center gap-2">
+          <span class="text-lg">
+            1000
+          </span>
+        <star-icon />
+      </div>
     </div>
   </div>
 </div>
