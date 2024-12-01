@@ -7,6 +7,7 @@ import {useRoute} from "vue-router";
 import useRole from "../composables/useRole.js";
 import router from "../router.js";
 import axiosClient from "../axios/axiosClient.js";
+import useRegistrationStore from "../store/useRegistrationStore.js";
 
 const courseStore = useDetailCourseStore();
 const role = useRole();
@@ -25,8 +26,9 @@ onMounted(async () => {
 });
 
 function signUpProgram() {
-  const {data} = axiosClient.post(`/programs/${route.params.id}`);
-  console.log(data)
+  if(role === 'student') {
+    axiosClient.post(`/programs/${route.params.id}`);
+  }
 }
 </script>
 
