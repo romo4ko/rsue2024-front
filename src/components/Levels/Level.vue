@@ -10,6 +10,7 @@ import useDetailCourseStore from "../../store/useDetailCourseStore.js";
 import {onMounted, ref} from "vue";
 import useDetailLevelStore from "../../store/useDetailLevelStore.js";
 import useRole from "../../composables/useRole.js";
+import Editor from 'primevue/editor';
 
 const courseStore = useDetailCourseStore();
 const levelStore = useDetailLevelStore();
@@ -64,13 +65,10 @@ onMounted(async () => {
       </h3>
     </div>
     <div class="theoretic-part py-10">
-      <span v-if="!editMode" class="w-[784px]">
-      {{ levelStore.level.theory }}
-      </span>
+      <span v-if="!editMode" class="w-[784px]" v-html="levelStore.level.theory" />
       <div class="flex flex-col gap-10" v-else>
-        <FloatLabel variant="on">
-          <Textarea id="theory" class="w-[784px] h-[500px]" v-model="levelStore.level.theory" />
-          <label for="theory">Теоретический материал</label>
+        <FloatLabel variant="on" class="mb-7">
+          <Editor id="theory" class="w-[784px] h-[500px]" v-model="levelStore.level.theory" />
         </FloatLabel>
         <FloatLabel variant="on">
           <InputText type="number" id="theoryPoints" v-model="levelStore.level.points" />
@@ -90,9 +88,7 @@ onMounted(async () => {
           <StepPanel v-for="(exercise, key) of levelStore.level.exercises" v-slot="{ activateCallback }"
                      :value="String(key + 1)">
             <div class="flex flex-col my-5">
-              <div v-if="!editMode" class="my-5">
-                {{ exercise.condition }}
-              </div>
+              <div v-if="!editMode" class="my-5" v-html="exercise.condition" />
               <div class="flex flex-col gap-8" v-else>
                 <FloatLabel variant="on">
                   <Textarea id="condition" class="w-full" v-model="exercise.condition" />
