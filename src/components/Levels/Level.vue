@@ -65,9 +65,7 @@ onMounted(async () => {
     <div class="theoretic-part py-10">
       <span v-if="!editMode" class="w-[784px]" v-html="levelStore.level.theory" />
       <div class="flex flex-col gap-10" v-else>
-        <FloatLabel variant="on" class="mb-7">
-          <Editor id="theory" class="w-[784px] h-[500px]" v-model="levelStore.level.theory" />
-        </FloatLabel>
+        <Editor id="theory" class="w-[784px] h-[500px] mb-7" v-model="levelStore.level.theory" />
         <FloatLabel variant="on">
           <InputText type="number" id="theoryPoints" v-model="levelStore.level.points" />
           <label for="theoryPoints">Кол-во очков</label>
@@ -87,11 +85,11 @@ onMounted(async () => {
                      :value="String(key + 1)">
             <div class="flex flex-col my-5">
               <div v-if="!editMode" class="my-5" v-html="exercise.condition" />
-              <div class="flex flex-col gap-8" v-else>
-                <FloatLabel variant="on">
-                  <Textarea id="condition" class="w-full" v-model="exercise.condition" />
-                  <label for="condition">Условие задания</label>
-                </FloatLabel>
+              <div v-else>
+                <div class="mb-2">
+                  Условие задания
+                </div>
+                <Editor id="condition" class="w-full mb-7" v-model="exercise.condition" />
                 <FloatLabel variant="on">
                   <InputText type="number" id="exercisePoints" v-model="exercise.points" />
                   <label for="exercisePoints">Кол-во очков</label>
