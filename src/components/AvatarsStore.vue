@@ -3,13 +3,25 @@ import StarIcon from "./Icons/StarIcon.vue";
 import {Button} from "primevue";
 import useAvatarsStore from "../store/useAvatarsStore.js";
 import {onMounted, ref} from "vue";
+import useRegistrationStore from "../store/useRegistrationStore.js";
+import router from "../router.js";
 
-const { getAvatarsList } = useAvatarsStore()
+const {getAvatarsList, buyAvatar} = useAvatarsStore()
+const registrationStore = useRegistrationStore()
+const profile = registrationStore.user.data
 const avatars = ref([])
+const route = router.resolve({name: 'Profile'});
 
 onMounted(async () => {
   avatars.value = await getAvatarsList()
 })
+
+async function buyingAvatar(avatarId) {
+  await buyAvatar(avatarId);
+  await registrationStore.getUser(profile.id)
+
+  window.location.href = route.href
+}
 </script>
 
 <template>
@@ -28,9 +40,9 @@ onMounted(async () => {
           <span>
             {{ item.price }}
           </span>
-          <star-icon />
+          <star-icon/>
         </div>
-        <Button class="w-full">Купить</Button>
+        <Button class="w-full" @click="buyingAvatar(item.id)">Купить</Button>
       </div>
     </div>
   </div>

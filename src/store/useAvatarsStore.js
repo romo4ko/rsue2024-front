@@ -12,7 +12,17 @@ const useAvatarsStore = defineStore("avatars", {
                 console.error(error);
                 throw error;
             }
-        }
+        },
+        async buyAvatar(avatarId) {
+            try {
+                const {data} = await axiosClient.post(`/avatars/buy/${avatarId}`)
+
+                return data
+            } catch (error) {
+                console.error(error);
+                throw error;
+            }
+        },
     },
 });
 

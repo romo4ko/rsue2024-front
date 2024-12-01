@@ -40,7 +40,8 @@ const navList = getNav(user.roles[0].name);
     <div class="avatar-wrapper">
       <h2 class="font-semibold">{{ user.name }}</h2>
       <button type="button" @click="toggle">
-        <Avatar :label="user.name[0]" class="mr-2" size="large" style="background-color: #ece9fc; color: #2a1261"/>
+        <img v-if="user.avatar" :src="user.avatar" class="w-[48px] h-[48px] rounded-[6px]" alt=".">
+        <Avatar v-else :label="user.name[0]" class="mr-2" size="large" style="background-color: #ece9fc; color: #2a1261"/>
       </button>
       <Popover ref="popup">
         <Button @click="logout">Выйти</Button>
